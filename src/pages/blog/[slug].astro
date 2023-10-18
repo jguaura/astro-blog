@@ -1,5 +1,4 @@
 ---
-import type { GetStaticPaths } from "astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Main from "../../components/Main.astro";
@@ -8,9 +7,8 @@ import { Image } from "astro:assets";
 
 export const getStaticPaths = async () => {
   const posts = await getCollection('posts');
-  console.info('sss', posts)
+
   const paths = posts.map(post => {
-    console.info('d', post)
     return {
       params: { slug: post.slug },
       props: { post }
@@ -26,6 +24,7 @@ type Props = {
 }
 
 const { post } = Astro.props;
+const { Content } = await post.render();
 ---
 
 <Layout title="About Rhythm Nation Blog">
@@ -39,5 +38,6 @@ const { post } = Astro.props;
     format="webp"
     class="rounded-2xl shadow-xl mb-28 object-cover"
    />
+   <Content />
   </Main>
 </Layout>
