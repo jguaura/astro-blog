@@ -1,8 +1,9 @@
 ---
 type Props = {
   text: string;
+  className?: string;
 }
-const { text } = Astro.props;
+const { text, className } = Astro.props;
 ---
 
-<h1 class="text-3xl text-teal-900 font-bold mb-16">{text}</h1>
+<h1 class={`text-3xl text-teal-900 font-bold mb-16 ${className}`}>{text}</h1>

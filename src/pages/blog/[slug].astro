@@ -4,6 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import Main from "../../components/Main.astro";
 import Title from "../../components/Title.astro";
 import { Image } from "astro:assets";
+import Typography from "../../components/Typography.astro";
 
 export const getStaticPaths = async () => {
   const posts = await getCollection('posts');
@@ -29,15 +30,17 @@ const { Content } = await post.render();
 
 <Layout title="About Rhythm Nation Blog">
   <Main>
-    <Title text={post.data.title}/>
+    <Title text={post.data.title} className="mb-6" />
    <Image 
     src={post.data.image}
     alt={post.data.title}
     width={1024}
     height={1024/2}
     format="webp"
-    class="rounded-2xl shadow-xl mb-28 object-cover"
+    class="rounded-xl shadow-xl mb-10 object-cover"
    />
-   <Content />
+   <Typography>
+     <Content />
+   </Typography>
   </Main>
 </Layout>
