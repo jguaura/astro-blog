@@ -1,13 +1,43 @@
 ---
+import type { GetStaticPaths } from "astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
 import Main from "../../components/Main.astro";
 import Title from "../../components/Title.astro";
-import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
 
+export const getStaticPaths = async () => {
+  const posts = await getCollection('posts');
+  console.info('sss', posts)
+  const paths = posts.map(post => {
+    console.info('d', post)
+    return {
+      params: { slug: post.slug },
+      props: { post }
+    }
+  })
+  return paths;
+}
+
+export const prerender = true
+
+type Props = {
+  post: CollectionEntry<'posts'>
+}
+
+const { post } = Astro.props;
 ---
 
 <Layout title="About Rhythm Nation Blog">
   <Main>
-    <Title text='About Rhythm Nation Blog'/>
-    <p>Lorem ipsum dolor sit amet consectetur.</p>
+    <Title text={post.data.title}/>
+   <Image 
+    src={post.data.image}
+    alt={post.data.title}
+    width={1024}
+    height={1024/2}
+    format="webp"
+    class="rounded-2xl shadow-xl mb-28 object-cover"
+   />
   </Main>
 </Layout>
