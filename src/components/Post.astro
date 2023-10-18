@@ -13,8 +13,8 @@ const { post } = Astro.props;
   <a href={`/blog/${[post.slug]}`} class="flex flex-col gap-2">
     <Image
      src={post.data.image}
-     width={1024}
-     height={1024 / 1.5}
+     width={600}
+     height={600 / 1.5}
      alt={post.data.title}
      class="rounded-lg shadow-xl aspect-thumbnail object-cover"
      format="webp"
