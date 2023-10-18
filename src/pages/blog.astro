@@ -3,6 +3,7 @@ import Main from '../components/Main.astro';
 import Layout from '../layouts/Layout.astro';
 import Title from '../components/Title.astro';
 import { getCollection } from "astro:content";
+import PostList from '../components/PostList.astro';
 
 const posts = await getCollection("posts");
 ---
@@ -10,5 +11,6 @@ const posts = await getCollection("posts");
 <Layout title="Blog | Rhythm Nation Blog">
   <Main>
     <Title text='Rhythm Nation Blog'/>
+    <PostList posts={posts} />
   </Main>
 </Layout>
